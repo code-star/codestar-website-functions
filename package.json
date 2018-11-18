@@ -6,7 +6,9 @@
     "got": "^9.3.2",
     "oauth": "^0.9.15"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "sls package --verbose"
+  },
   "devDependencies": {
     "serverless": "^1.33.1"
   }
