@@ -5,11 +5,11 @@ script: npm run build # is this needed?
 deploy:
   # TEST
   - provider: lambda
-#    function_name: "lambda-test"
-#    region: "us-east-1"
-#    role: "arn:aws:iam::0123456789012:role/lambda_basic_execution"
-#    runtime: "nodejs8.10"
-#    handler_name: "handler"
+    function_name: "staticSiteMailer"
+    region: "eu-west-1"
+    role: "arn:aws:iam::552504168047:role/codestar-nl-serverless-test-eu-west-1-lambdaRole"
+    runtime: "nodejs8.10"
+    handler_name: "serverless/mailer.staticSiteMailer"
     on:
       branch: test
   # PROD
