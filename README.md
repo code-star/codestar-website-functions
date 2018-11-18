@@ -1,10 +1,11 @@
-[![Build Status](https://travis-ci.org/code-star/codestar-website-react.svg?branch=develop)](https://travis-ci.org/code-star/codestar-website-react)
+[![Build Status](https://travis-ci.org/code-star/codestar-website-functions.svg?branch=develop)](https://travis-ci.org/code-star/codestar-website-functions)
 
 <img align=center src=https://cloud.githubusercontent.com/assets/4116708/12473911/e67fdd44-c016-11e5-9c21-5714e07549fe.png width=450 />
 
 *Passionate programmers standing to make a change*
 
 ---
+
 # Codestar website
 
 Note: uses custom fork of [react-scripts-ts](https://github.com/code-star/create-react-app-typescript) to
@@ -20,18 +21,20 @@ use CSS Modules without ejecting.
 
 ## TODO
 
-* Add CI/CD with Travis CI: https://docs.travis-ci.com/user/deployment/lambda
-* Add inline documentation to the Serverless functions and generate API docs, e.g. http://apidocjs.com/
-* Add unit test
-* Add linting
-* Convert to TS & GraphQL https://graphql-code-generator.com/
-* https://github.com/dherault/serverless-offline
-* https://github.com/serverless-heaven/serverless-webpack
+- Add CI/CD with Travis CI: https://docs.travis-ci.com/user/deployment/lambda
+- Add inline documentation to the Serverless functions and generate API docs, e.g. http://apidocjs.com/
+- Add unit test
+- Add linting
+- Convert to TS & GraphQL https://graphql-code-generator.com/
+- https://github.com/dherault/serverless-offline
+- https://github.com/serverless-heaven/serverless-webpack
 
 
 ## Requirements
 
-Uses Node 8.10 (newest available on AWS)
+Uses Node 8.10 (latest Node version available on AWS).
+
+When [nvm](https://github.com/creationix/nvm) is installed, this Node version can be activated by running `nvm use` in the root of the project.
 
 
 ## Configuration
@@ -39,8 +42,7 @@ Uses Node 8.10 (newest available on AWS)
 To configure, run:
 
 ```bash
-npm i -S serverless
-npx serverless create --template aws-nodejs --name static-site-mailer
+npm i
 npx sls config credentials --provider aws --key YOUR_ACCESS_KEY_ID --secret YOUR_SECRET_ACCESS_KEY
 ```
 
@@ -51,14 +53,14 @@ The default region is set in `serverless.yml` and can be added to `sls` with the
 
 ## Developing
 
-To invoke a function locally, run:
+To invoke a function from the command line, run:
 
-- Production:
+- On AWS with default stage (i.e. `test`). The environmental variables that are configured on the AWS will be used.
 
 	```bash
 	npx sls invoke --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json
 	```
-- Test:
+- Local sources (note the `local` keyword). The environmental variables must be set locally or inline:
 
 	```bash
 	STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json
@@ -68,36 +70,66 @@ To invoke a function locally, run:
 
 **NOTE: Replace `example@example.com` with the email address validated in AWS SES**
 
+A list of example calls for each endpoint for local development:
+
+- staticSiteMailer: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json`
+- getUpcomingEvents: `DEBUG=true npx sls invoke local --function getUpcomingEvents --path serverless/staticSiteMailer-dummy-payload.json`
+- getPastEvents: `DEBUG=true npx sls invoke local --function getPastEvents --path serverless/staticSiteMailer-dummy-payload.json`
+- getRecentTweets: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json`
+
+## Environmental variables
+
 The environment variable `DEBUG=true` will allow calls from `localhost:3000`. This can also be enabled on AWS if needed.
 
-The destination email address is set in the environment variable `STATIC_SITE_MAILER_DESTINATION`.
-The source email address is set in the environment variable `STATIC_SITE_MAILER_SOURCE`.
+For example, the `staticSiteMailer` function requires these environmental variables:
+
+- The destination email address is set in the environment variable `STATIC_SITE_MAILER_DESTINATION`. This must be an address verified in AWS SES.
+- The source email address is set in the environment variable `STATIC_SITE_MAILER_SOURCE`. This must be an address verified in AWS SES.
+
 You can check the [documentation](https://serverless.com/framework/docs/providers/spotinst/guide/variables/#environment-variables) for
 more information about environment variables.
 
-Locally this can be set in a test profile or just by setting the environment variable with
-`export STATIC_SITE_MAILER_DESTINATION=example@example.com`. In the code it is accessed via `process.env.STATIC_SITE_MAILER_DESTINATION`.
+Locally an environmental variable can be set in a test profile or just by setting the environment variable with
+`export STATIC_SITE_MAILER_DESTINATION=example@example.com`. An alternative is setting it inline, like in the examples above.
 
-To change it in AWS:
-
-- Go to `https://eu-west-1.console.aws.amazon.com/lambda/` and find the function
-- Scroll to Environment variables and add the correct key/value
+In the code it is accessed via `process.env.STATIC_SITE_MAILER_DESTINATION`.
 
 
 ## Deploying
 
-Deploy to AWS (TEST stage):
+**Note** that deployment should only be done by [Travis CI](https://travis-ci.org/code-star/codestar-website-functions).
+
+- New features must be added by pull request to the `test` branch
+- Commits to the `test` branch are automatically deployed by Travis CI to the `test` stage on AWS.
+- Releases must be done by pull requests from the `test` branch to the `production` branch. 
+- Commits to the `production` branch are automatically deployed by Travis CI to the `production` stage on AWS.
+
+**Note** that all dependencies from node_modules that are used in production, need to be packaged. `sls` automatically only
+packages dependencies and skips devDependencies.
+
+Although deployments should not be done manually, it might be useful how deployments work.
+
+To deploy to AWS (TEST stage) **do not do this manually**:
 
 ```bash
 npx sls deploy --verbose
 ```
 
-Deploy to AWS (PROD stage):
+Deploy to AWS (PROD stage) **do not do this manually**:
 
 ```bash
 npx sls deploy --verbose --stage prod
 ```
 
-This logs (among others) the `POST` endpoint (https://x.execute-api.us-east-1.amazonaws.com/test/static-site-mailer).
+This logs (among others) the `POST` endpoint, e.g. `https://[id].execute-api.us-east-1.amazonaws.com/test/static-site-mailer`.
 
-This can be tested with Postman, but to call it from a form, CORS must be configured.
+The endpoints can be called with Postman, but to be called from a web application, CORS must be configured.
+
+**Note** that it is still needed to set environmental variables in AWS:
+
+- Go to `https://eu-west-1.console.aws.amazon.com/lambda/` and find the function
+- Scroll to Environment variables and add the correct key/value
+
+## Documentation of all endpoints
+
+**TODO** must be generated
