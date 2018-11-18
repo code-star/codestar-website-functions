@@ -95,6 +95,14 @@ Locally an environmental variable can be set in a test profile or just by settin
 In the code it is accessed via `process.env.STATIC_SITE_MAILER_DESTINATION`.
 
 
+## Set up CI
+
+https://docs.travis-ci.com/user/deployment/lambda
+
+> AWS credentials can be passed in via the access_key_id and secret_access_key parameters. If these are not set, Travis will fall back on the standard AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables. If you choose to provide parameters, it is recommended that you encrypt your secret access key. Assuming you have the Travis CI command line client installed, you can do it like this:
+> $ travis encrypt "AWS SECRET ACCESS KEY" --add deploy.secret_access_key
+
+
 ## Deploying
 
 **Note** that deployment should only be done by [Travis CI](https://travis-ci.org/code-star/codestar-website-functions).

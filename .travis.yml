@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- 8.10
+script: npx sls package --verbose # is this needed?
+deploy:
+  # TEST
+  - provider: lambda
+    function_name: "lambda-test"
+    region: "us-east-1"
+    role: "arn:aws:iam::0123456789012:role/lambda_basic_execution"
+    runtime: "nodejs8.10"
+    handler_name: "handler"
+    on:
+      branch: test
