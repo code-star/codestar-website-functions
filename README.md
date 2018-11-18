@@ -75,7 +75,7 @@ A list of example calls for each endpoint for local development:
 - staticSiteMailer: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json`
 - getUpcomingEvents: `DEBUG=true npx sls invoke local --function getUpcomingEvents --path serverless/staticSiteMailer-dummy-payload.json`
 - getPastEvents: `DEBUG=true npx sls invoke local --function getPastEvents --path serverless/staticSiteMailer-dummy-payload.json`
-- getRecentTweets: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json`
+- getRecentTweets: `DEBUG=true npx sls invoke local --function getRecentTweets --path serverless/staticSiteMailer-dummy-payload.json`
 
 ## Environmental variables
 

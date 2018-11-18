@@ -87,6 +87,6 @@ module.exports.getPastEvents = async (event, context, callback) => {
     });
   } catch(err) {
     console.log(err, err.stack);
-    callback('Failed GET_PAST_EVENTS ' + err);
+    callback(`Failed GET_PAST_EVENTS ${err}`);
   }
 };
