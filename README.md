@@ -16,7 +16,6 @@ use CSS Modules without ejecting.
 1. [Configuration](#configuration)
 1. [Developing](#developing)
 1. [Deploying](#deploying)
-1. [Invoking a function locally](#invoking-a-function-locally)
 
 
 ## TODO
@@ -34,6 +33,7 @@ use CSS Modules without ejecting.
 
 Uses Node 8.10 (newest available on AWS)
 
+
 ## Configuration
 
 To configure, run:
@@ -48,31 +48,10 @@ npx sls config credentials --provider aws --key YOUR_ACCESS_KEY_ID --secret YOUR
 
 The default region is set in `serverless.yml` and can be added to `sls` with the parameter `-r eu-west-1`
 
+
 ## Developing
 
-## Deploying
-
-Deploy to AWS (TEST stage):
-
-```bash
-npx sls deploy --verbose
-```
-
-Deploy to AWS (PROD stage):
-
-```bash
-npx sls deploy --verbose --stage prod
-```
-
-This logs (among others) the `POST` endpoint (https://x.execute-api.us-east-1.amazonaws.com/test/static-site-mailer).
-
-This can be tested with Postman, but to call it from a form, CORS must be configured.
-
-
-
-## Invoking a function locally
-
-To invoke the function, run:
+To invoke a function locally, run:
 
 - Production:
 
@@ -103,3 +82,22 @@ To change it in AWS:
 
 - Go to `https://eu-west-1.console.aws.amazon.com/lambda/` and find the function
 - Scroll to Environment variables and add the correct key/value
+
+
+## Deploying
+
+Deploy to AWS (TEST stage):
+
+```bash
+npx sls deploy --verbose
+```
+
+Deploy to AWS (PROD stage):
+
+```bash
+npx sls deploy --verbose --stage prod
+```
+
+This logs (among others) the `POST` endpoint (https://x.execute-api.us-east-1.amazonaws.com/test/static-site-mailer).
+
+This can be tested with Postman, but to call it from a form, CORS must be configured.
