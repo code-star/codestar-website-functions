@@ -6,10 +6,7 @@
 
 ---
 
-# Codestar website
-
-Note: uses custom fork of [react-scripts-ts](https://github.com/code-star/create-react-app-typescript) to
-use CSS Modules without ejecting.
+# Codestar website Serverless functions
 
 **Contents:**
 
