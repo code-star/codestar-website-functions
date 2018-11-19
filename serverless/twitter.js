@@ -3,12 +3,21 @@
 const util = require('./util');
 const OAuth = require('oauth');
 
-const { SCREEN_NAME, TWEET_COUNT } = process.env;
+const {
+  SCREEN_NAME,
+  TWEET_COUNT,
+  TWITTER_CONSUMER_KEY,
+  TWITTER_APP_SECRET,
+  TWITTER_USER_TOKEN,
+  TWITTER_USER_SECRET
+} = process.env;
 const GET_RECENT_TWEETS_URL = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${SCREEN_NAME}&count=${TWEET_COUNT}`;
 
 const authCallback = (callback, headers) => {
+  console.log('authCallback init')
   /* params: error, data, result */
   return (error, data) => {
+    console.log('authCallback response', error, data)
     try {
       if (error) {
         console.log(error);
@@ -26,14 +35,13 @@ const authCallback = (callback, headers) => {
   };
 };
 
-// TODO remove hard coded tokens
 module.exports.getRecentTweets = (event, context, callback) => {
   const headers = util.safeGetHeaders(event.headers.origin);
   const oauth = new OAuth.OAuth(
     'https://api.twitter.com/oauth/request_token',
     'https://api.twitter.com/oauth/access_token',
-    'tjJCNag24jknOpsk9BTs0Tour',
-    'C9aNnCfb9tigjfMk34kknq7Cd9oAtW9TW77m2YJBQxv2smZQ5U',
+    TWITTER_CONSUMER_KEY, // Twitter application consumer key
+    TWITTER_APP_SECRET, // Twitter application secret
     '1.0',
     '',
     'HMAC-SHA1'
@@ -41,8 +49,8 @@ module.exports.getRecentTweets = (event, context, callback) => {
 
   oauth.get(
     GET_RECENT_TWEETS_URL,
-    '132144715-JB0dtp503oGA0ArDsZ0r4oFsh9GcaQRAvc1Xqyyw',
-    '9wCdiAuuzIWFdeAE6gL4hzjV5Rsj1ZLQzyjFC5aKDjHMN',
+    TWITTER_USER_TOKEN, // Twitter user token for this app
+    TWITTER_USER_SECRET, // Twitter user secret for this app
     authCallback(callback, headers)
   );
 };
