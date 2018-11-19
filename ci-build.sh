@@ -11,6 +11,6 @@ fi
 export STAGE
 echo STAGE is $STAGE
 # Change attributes on node_modules for AWS
-chmod -R +x node_modules
+chmod -R 777 node_modules
 # Make a package and deploy for the selected stage
 sls deploy --verbose --stage=$STAGE
