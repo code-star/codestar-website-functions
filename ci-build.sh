@@ -10,6 +10,7 @@ else
 fi
 export STAGE
 echo STAGE is $STAGE
-# npm run build
+# Change attributes on node_modules for AWS
+chmod -R +x node_modules
 # Make a package and deploy for the selected stage
 sls deploy --verbose --stage=$STAGE

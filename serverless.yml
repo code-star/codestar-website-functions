@@ -53,7 +53,7 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
+package:
 #  include:
 #    - serverless/**
 #    - serverless.yml
@@ -82,7 +82,8 @@ provider:
 #    - node_modules/defer-to-connect/**
 #    # oauth ^0.9.15 and all its dependencies
 #    - node_modules/oauth/**
-#  exclude:
+  exclude:
+    - .idea/**
 #  	# path that starts with * must be in "
 #    - "**/*"
 
