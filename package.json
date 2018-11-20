@@ -7,9 +7,11 @@
     "oauth": "^0.9.15"
   },
   "scripts": {
-    "build": "sls package --verbose"
+    "build": "sls package --verbose",
+    "docs": "documentation build src/* -f md > API.md"
   },
   "devDependencies": {
+    "documentation": "^8.1.2",
     "serverless": "^1.33.1"
   }
 }

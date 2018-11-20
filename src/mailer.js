@@ -35,6 +35,38 @@ function sendEmail(formData, sourceAddress, destinationAddress) {
 	});
 }
 
+/**
+ * @description Lambda function staticSiteMailer
+ *
+ * Method: POST
+ *
+ * Expected fields:
+ * - name {string}
+ * - email {string}
+ * - message {string}
+ *
+ * Validates the origin URL with {@link safeGetHeaders}
+ *
+ * Endpoints
+ * - on test stage: https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer
+ * - on prod stage: https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer
+ *
+ * Envars needs to be set:
+ * process.env.STATIC_SITE_MAILER_SOURCE;
+ * process.env.STATIC_SITE_MAILER_DESTINATION;
+ *
+ * @param event
+ * @param context
+ * @param callback
+ * @returns {Promise<void>}
+ *
+ * @example
+ * // Call locally from the CLI:
+ * STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path test/staticSiteMailer-dummy-payload.json
+ *
+ * // Expected payload
+ * // @TODO
+ */
 module.exports.staticSiteMailer = async (event, context, callback) => {
 	const formData = JSON.parse(event.body);
 	const sourceAddress = process.env.STATIC_SITE_MAILER_SOURCE;
