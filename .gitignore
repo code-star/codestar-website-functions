@@ -31,3 +31,6 @@ yarn.lock
 
 #Cache
 .cache
+
+.nyc_output
+coverage

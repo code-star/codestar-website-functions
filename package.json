@@ -8,10 +8,13 @@
   },
   "scripts": {
     "build": "sls package --verbose",
-    "docs": "documentation build src/* -f md > API.md"
+    "docs": "documentation build src/* -f md > API.md",
+    "test": "nyc ava src/*.test.js"
   },
   "devDependencies": {
+    "ava": "^1.0.0-rc.2",
     "documentation": "^8.1.2",
+    "nyc": "^13.1.0",
     "serverless": "^1.33.1"
   }
 }
