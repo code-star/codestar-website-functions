@@ -1,20 +1,22 @@
 import test from 'ava';
 import {safeGetHeaders} from './util';
 
-// test('foo', t => {
-//   t.pass();
-// });
-//
-// test('bar', async t => {
-//   const bar = Promise.resolve('bar');
-//   t.is(await bar, 'bar');
-// });
-
-// Expects a white-listed origin URL
 test('Throw error if not a white-listed origin URL', t => {
   t.throws(() => {
-    safeGetHeaders();
-  }, 'Not white-listed origin: undefined');
+    safeGetHeaders('http://localhost:3000');
+  }, 'Not white-listed origin: http://localhost:3000');
+});
+
+
+test('Returns header with debug origin', t => {
+  process.env.DEBUG = 'true';
+  const headers = safeGetHeaders('http://localhost:3000');
+  t.deepEqual(headers, {
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      'Content-Type': 'application/json',
+    }
+  );
+  delete process.env.DEBUG;
 });
 
 test('Returns header with prod origin', t => {
