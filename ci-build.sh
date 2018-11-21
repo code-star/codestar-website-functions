@@ -1,5 +1,10 @@
 #!/bin/bash
 # Determine stage
+echo TRAVIS_PULL_REQUEST is $TRAVIS_PULL_REQUEST
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+    echo Pull Request, skipping deploy
+    exit
+fi
 echo TRAVIS_BRANCH is $TRAVIS_BRANCH
 if [ "${TRAVIS_BRANCH}" == production ]; then
     STAGE=prod
