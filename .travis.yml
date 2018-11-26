@@ -2,10 +2,4 @@ language: node_js
 node_js:
 - 8.10
 before_script: npm test
-script:
-  - |
-    if [ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" ]; then
-      ./ci-build.sh
-    else
-      echo "Non monitored branch, skipping deploy 🚀";
-    fi
+script: ./ci-build.sh
