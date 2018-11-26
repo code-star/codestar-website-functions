@@ -7,11 +7,6 @@ test('Throw error if not a white-listed origin URL', t => {
   }, 'Not white-listed origin: http://localhost:3000');
 });
 
-test('Should bail on CI', t => {
-  safeGetHeaders('http://localhost:3000');
-});
-
-
 test('Returns header with debug origin', t => {
   process.env.DEBUG = 'true';
   const headers = safeGetHeaders('http://localhost:3000');
