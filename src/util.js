@@ -10,6 +10,9 @@ const headers = origin => ({
 /**
  * Gets reponse headers but throws error if the requesting origin is not whitelisted.
  * This must be done before anything else to prevent calls from unknown origins.
+ *
+ * @param origin {string} URL describing the origin of the call
+ * @returns headers {Object}
  */
 module.exports.safeGetHeaders = (origin) => {
 	const debug = process.env.DEBUG;
