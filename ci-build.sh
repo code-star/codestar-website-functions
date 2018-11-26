@@ -21,4 +21,5 @@ chmod -R 777 node_modules
 # Set the AWS credentials from environmental variables
 sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
 # Make a package and deploy for the selected stage
-sls deploy --verbose --stage=$STAGE
+echo deploy
+#sls deploy --verbose --stage=$STAGE
