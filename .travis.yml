@@ -1,6 +1,5 @@
 language: node_js
 node_js:
 - 8.10
-script:
-- npm test
-- ./ci-build.sh
+before_script: npm test
+script: ./ci-build.sh
