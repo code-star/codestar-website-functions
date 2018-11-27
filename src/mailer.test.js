@@ -19,7 +19,7 @@ test('Calls callback with error message if invalid origin', t => {
         },
         null,
         (result) => {
-            t.is(result, 'Failed STATIC_SITE_MAILER Error: Not white-listed origin: http://localhost:3000')
+            t.is(result, '1Failed STATIC_SITE_MAILER Error: Not white-listed origin: http://localhost:3000')
         });
 });
 
