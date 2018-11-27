@@ -1,9 +1,13 @@
 'use strict';
-const AWS = require('aws-sdk');
-const SES = new AWS.SES();
+// const AWS = require('aws-sdk');
+// const SES = new AWS.SES();
 const util = require('./util');
 
 function sendEmail(formData, sourceAddress, destinationAddress) {
+
+    const AWS = require('aws-sdk');
+    const SES = new AWS.SES();
+
 	return new Promise((resolve, reject) => {
 		const emailParams = {
 			Source: sourceAddress, // SES SENDING EMAIL
