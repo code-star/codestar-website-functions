@@ -9,12 +9,23 @@
   "scripts": {
     "build": "sls package --verbose",
     "docs": "documentation build src/* -f md > API.md",
-    "test": "nyc ava src/*.test.js"
+    "lint": "eslint ./src/**/*",
+    "test": "nyc ava src/*.test.js",
+    "prepush": "npm test",
+    "prettier": "prettier --write ./src/**/*.{js,ts}"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "devDependencies": {
     "ava": "^1.0.0-rc.2",
     "documentation": "^8.1.2",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-recommended": "^4.0.0",
     "nyc": "^13.1.0",
+    "prettier": "^1.15.2",
     "serverless": "^1.33.1",
     "sinon": "^7.1.1"
   }
