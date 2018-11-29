@@ -6,6 +6,10 @@
     "got": "^9.3.2",
     "oauth": "^0.9.15"
   },
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.10.0"
+  },
   "scripts": {
     "build": "sls package --verbose",
     "docs": "documentation build src/* -f md > API.md",
