@@ -137,8 +137,4 @@ The endpoints can be called with Postman, but to be called from a web applicatio
 
 ## Documentation of all endpoints
 
-**TODO** must be generated
-
-
-// TODO use: "test": "npm run lint && nyc ava src/*.test.js",
-// TODO use: "precommit": "npm run docs && npm run prettier"
+Generated into API.md

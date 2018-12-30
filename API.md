@@ -27,9 +27,11 @@ Endpoints
 -   on test stage: [https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer][7]
 -   on prod stage: [https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer][8]
 
-Envars needs to be set:
+Envars that need to be set:
 process.env.STATIC_SITE_MAILER_SOURCE;
 process.env.STATIC_SITE_MAILER_DESTINATION;
+
+Both mail addresses need to be validated in AWS SES
 
 ### Parameters
 
@@ -44,7 +46,12 @@ process.env.STATIC_SITE_MAILER_DESTINATION;
 STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path test/staticSiteMailer-dummy-payload.json
 
 // Expected payload
-// @TODO
+{
+  "headers": {
+     "origin": "ORIGIN"
+  },
+  "body": "{\"name\": \"Sender Name\",\"email\": \"sender@example.com\",\"message\": \"This is a dummy message to test the contact form\",\"phone\": \"123\"}",
+}
 ```
 
 Returns **[Promise][9]&lt;void>** 
@@ -56,7 +63,9 @@ This must be done before anything else to prevent calls from unknown origins.
 
 ### Parameters
 
--   `origin`  
+-   `origin`  {string} URL describing the origin of the call
+
+Returns **any** headers {Object}
 
 [1]: #staticsitemailer
 
