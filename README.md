@@ -55,12 +55,12 @@ To invoke a function from the command line, run:
 - On AWS with default stage (i.e. `test`). The environmental variables that are configured on the AWS will be used.
 
 	```bash
-	npx sls invoke --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json
+	npx sls invoke --function staticSiteMailer --path test/staticSiteMailer-dummy-payload.json
 	```
 - Local sources (note the `local` keyword). The environmental variables must be set locally or inline:
 
 	```bash
-	STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json
+	STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path test/staticSiteMailer-dummy-payload.json
 	```
 
 (`--path` is optional and points to a `POST` payload)
@@ -69,10 +69,10 @@ To invoke a function from the command line, run:
 
 A list of example calls for each endpoint for local development:
 
-- staticSiteMailer: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path serverless/staticSiteMailer-dummy-payload.json`
-- getUpcomingEvents: `DEBUG=true npx sls invoke local --function getUpcomingEvents --path serverless/staticSiteMailer-dummy-payload.json`
-- getPastEvents: `DEBUG=true npx sls invoke local --function getPastEvents --path serverless/staticSiteMailer-dummy-payload.json`
-- getRecentTweets: `SCREEN_NAME=Codestar_nl TWEET_COUNT=3 DEBUG=true npx sls invoke local --function getRecentTweets --path serverless/staticSiteMailer-dummy-payload.json`
+- staticSiteMailer: `STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=example@example.com DEBUG=true npx sls invoke local --function staticSiteMailer --path test/staticSiteMailer-dummy-payload.json`
+- getUpcomingEvents: `DEBUG=true npx sls invoke local --function getUpcomingEvents --path test/staticSiteMailer-dummy-payload.json`
+- getPastEvents: `DEBUG=true npx sls invoke local --function getPastEvents --path test/staticSiteMailer-dummy-payload.json`
+- getRecentTweets: `SCREEN_NAME=Codestar_nl TWEET_COUNT=3 DEBUG=true npx sls invoke local --function getRecentTweets --path test/staticSiteMailer-dummy-payload.json`
 
 ## Environmental variables
 
@@ -137,4 +137,4 @@ The endpoints can be called with Postman, but to be called from a web applicatio
 
 ## Documentation of all endpoints
 
-**TODO** must be generated
+Generated into API.md
