@@ -17,15 +17,14 @@ module.exports.getUpcomingEvents = async (event, context, callback) => {
     const headers = util.safeGetHeaders(event.headers.origin);
     const response = await got(GET_UPCOMING_EVENTS_URL, { json: true });
     const mEvents = response.body.map(
-      ({ name, time, link, description, featured_photo }) => {
-        return {
-          name,
-          time,
-          link,
-          description,
-          featured_photo,
-        };
-      }
+      // eslint-disable-next-line
+      ({ name, time, link, description, featured_photo }) => ({
+        name,
+        time,
+        link,
+        description,
+        featured_photo,
+      })
     );
     callback(null, {
       statusCode: 200,
@@ -38,6 +37,7 @@ module.exports.getUpcomingEvents = async (event, context, callback) => {
   }
 };
 
+// eslint-disable-next-line
 function pluckEventProperties({ name, time, link, featured_photo }) {
   return {
     name,
@@ -47,10 +47,12 @@ function pluckEventProperties({ name, time, link, featured_photo }) {
   };
 }
 
-async function addEventPhoto({ featured_photo, ...mEventWithoutPhoto }) {
-  const resolvedPhoto = featured_photo
-    ? featured_photo
-    : await getEventPhoto(mEventWithoutPhoto);
+async function addEventPhoto({
+  featured_photo: featuredPhoto,
+  ...mEventWithoutPhoto
+}) {
+  const resolvedPhoto =
+    featuredPhoto || (await getEventPhoto(mEventWithoutPhoto));
   return {
     featured_photo: resolvedPhoto,
     ...mEventWithoutPhoto,
@@ -69,9 +71,8 @@ async function getEventPhoto(mEventWithoutPhoto) {
       return {
         photo_link: photoUrl,
       };
-    } else {
-      throw new Error('No image found or parsing failed');
     }
+    throw new Error('No image found or parsing failed');
   } catch (err) {
     // E.g. 404 because not found
     return Promise.resolve({

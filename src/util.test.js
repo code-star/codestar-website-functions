@@ -1,5 +1,5 @@
-import test from 'ava';
 import { safeGetHeaders } from './util';
+import test from 'ava';
 
 test('Throw error if not a white-listed origin URL', t => {
   t.throws(() => {

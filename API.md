@@ -35,9 +35,9 @@ Both mail addresses need to be validated in AWS SES
 
 ### Parameters
 
--   `event`  
--   `context`  
--   `callback`  
+-   `event` **[object][9]** AWS event
+-   `context` **[object][9]** AWS context
+-   `callback` **[function][10]** AWS callback
 
 ### Examples
 
@@ -54,7 +54,7 @@ STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=exa
 }
 ```
 
-Returns **[Promise][9]&lt;void>** 
+Returns **[Promise][11]&lt;void>** Nothing is returned, AWS callback is used instead
 
 ## safeGetHeaders
 
@@ -63,9 +63,9 @@ This must be done before anything else to prevent calls from unknown origins.
 
 ### Parameters
 
--   `origin`  {string} URL describing the origin of the call
+-   `origin` **[string][12]** URL describing the origin of the call
 
-Returns **any** headers {Object}
+Returns **[Object][9]** headers
 
 [1]: #staticsitemailer
 
@@ -83,4 +83,10 @@ Returns **any** headers {Object}
 
 [8]: https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer
 
-[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[10]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[11]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[12]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
