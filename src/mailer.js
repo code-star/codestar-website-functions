@@ -4,6 +4,7 @@
 const util = require('./util');
 
 function sendEmail(formData, sourceAddress, destinationAddress) {
+  // eslint-disable-next-line import/no-extraneous-dependencies
   const AWS = require('aws-sdk');
   const SES = new AWS.SES();
 
@@ -64,10 +65,10 @@ function sendEmail(formData, sourceAddress, destinationAddress) {
  *
  * Both mail addresses need to be validated in AWS SES
  *
- * @param event
- * @param context
- * @param callback
- * @returns {Promise<void>}
+ * @param {object} event AWS event
+ * @param {object} context AWS context
+ * @param {function} callback AWS callback
+ * @return {Promise<void>} Nothing is returned, AWS callback is used instead
  *
  * @example
  * // Call locally from the CLI:

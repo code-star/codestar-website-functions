@@ -1,6 +1,7 @@
-import test from 'ava';
-import sinon from 'sinon';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import AWS from 'aws-sdk';
+import sinon from 'sinon';
+import test from 'ava';
 // Mock for AWS.SES that echos emailParams
 sinon.stub(AWS, 'SES').returns({
   sendEmail(emailParams, cb) {
@@ -8,6 +9,8 @@ sinon.stub(AWS, 'SES').returns({
     cb(null, emailParams);
   },
 });
+// Stub must be before import
+// eslint-disable-next-line
 import { staticSiteMailer } from './mailer';
 
 test('Calls callback with error message if invalid origin', t => {
