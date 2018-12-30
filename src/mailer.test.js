@@ -2,25 +2,31 @@ import test from 'ava';
 import sinon from 'sinon';
 import AWS from 'aws-sdk';
 // Mock for AWS.SES that echos emailParams
-sinon.stub(AWS, 'SES').returns({sendEmail(emailParams, cb) {
-        // console.log('received email params', emailParams)
-        cb(null, emailParams)
-    }});
-import {staticSiteMailer} from './mailer';
+sinon.stub(AWS, 'SES').returns({
+  sendEmail(emailParams, cb) {
+    // console.log('received email params', emailParams)
+    cb(null, emailParams);
+  },
+});
+import { staticSiteMailer } from './mailer';
 
 test('Calls callback with error message if invalid origin', t => {
-    // TODO https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md#callback-support
-    staticSiteMailer(
-        {
-            headers: {
-                origin: 'http://localhost:3000',
-            },
-            body: JSON.stringify({}),
-        },
-        null,
-        (result) => {
-            t.is(result, 'Failed STATIC_SITE_MAILER Error: Not white-listed origin: http://localhost:3000')
-        });
+  // TODO https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md#callback-support
+  staticSiteMailer(
+    {
+      headers: {
+        origin: 'http://localhost:3000',
+      },
+      body: JSON.stringify({}),
+    },
+    null,
+    result => {
+      t.is(
+        result,
+        'Failed STATIC_SITE_MAILER Error: Not white-listed origin: http://localhost:3000'
+      );
+    }
+  );
 });
 
 // https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md#before--after-hooks
@@ -30,40 +36,41 @@ test('Calls callback with error message if invalid origin', t => {
 // });
 
 test('Calls callback with ?? if ??', async t => {
-    t.plan(1);
+  t.plan(1);
 
-    // const x = {
-    //     y() {
-    //         return 'y';
-    //     }
-    // };
+  // const x = {
+  //     y() {
+  //         return 'y';
+  //     }
+  // };
 
-    // sinon.stub(x, 'y').returns('z');
-    // t.is(x.y(), 'z');
+  // sinon.stub(x, 'y').returns('z');
+  // t.is(x.y(), 'z');
 
-    // console.log(sinon.mock, sinon.mock());
-    // works: sinon.stub(util, 'safeGetHeaders').throws('TEST ERROR')
+  // console.log(sinon.mock, sinon.mock());
+  // works: sinon.stub(util, 'safeGetHeaders').throws('TEST ERROR')
 
-    // works if run before import in mailer.js
-    // sinon.stub(AWS, 'SES').returns({sendEmail() {}});
+  // works if run before import in mailer.js
+  // sinon.stub(AWS, 'SES').returns({sendEmail() {}});
 
-    // TODO add prettier
+  // TODO add prettier
 
-    process.env.STATIC_SITE_MAILER_SOURCE = 'example@example.com';
-    await staticSiteMailer(
-        {
-            headers: {
-                origin: 'https://www.codestar.nl',
-            },
-            body: JSON.stringify({}),
-        },
-        null,
-        (_, result) => {
-            // TODO t.deepEqual(result, {
-            //     statusCode: 200,
-            // });
-            t.is(JSON.parse(result.body).message.Source, 'example@example.com')
-        });
+  process.env.STATIC_SITE_MAILER_SOURCE = 'example@example.com';
+  await staticSiteMailer(
+    {
+      headers: {
+        origin: 'https://www.codestar.nl',
+      },
+      body: JSON.stringify({}),
+    },
+    null,
+    (_, result) => {
+      // TODO t.deepEqual(result, {
+      //     statusCode: 200,
+      // });
+      t.is(JSON.parse(result.body).message.Source, 'example@example.com');
+    }
+  );
 });
 
 // TODO test sendMail if(err)

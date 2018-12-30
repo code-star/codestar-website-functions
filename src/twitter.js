@@ -9,15 +9,15 @@ const {
   TWITTER_CONSUMER_KEY,
   TWITTER_APP_SECRET,
   TWITTER_USER_TOKEN,
-  TWITTER_USER_SECRET
+  TWITTER_USER_SECRET,
 } = process.env;
 const GET_RECENT_TWEETS_URL = `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${SCREEN_NAME}&count=${TWEET_COUNT}`;
 
 const authCallback = (callback, headers) => {
-  console.log('authCallback init')
+  console.log('authCallback init');
   /* params: error, data, result */
   return (error, data) => {
-    console.log('authCallback response', error, data)
+    console.log('authCallback response', error, data);
     try {
       if (error) {
         console.log(error);
