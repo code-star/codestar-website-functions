@@ -1,8 +1,8 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const SolverState_1 = require("./SolverState");
-const Ship_1 = require("./Ship");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const SolverState_1 = require('./SolverState');
+const Ship_1 = require('./Ship');
 const reducer = transactions => (acc, planet, index) => {
   const transaction = transactions.find(
     ({ planetIndex }) => planetIndex === index + 1
@@ -40,7 +40,7 @@ const reducer = transactions => (acc, planet, index) => {
       }`
     );
   }
-  if (planet.faction === "Liberty" && acc.cargoHold.contraband > 0) {
+  if (planet.faction === 'Liberty' && acc.cargoHold.contraband > 0) {
     errors.push(
       `Arrived at a Liberty planet (index ${
         transaction.planetIndex
@@ -66,7 +66,7 @@ const reducer = transactions => (acc, planet, index) => {
     water: acc.cargoHold.water + transaction.deltaWater,
     ore: acc.cargoHold.ore + transaction.deltaOre,
     engineParts: acc.cargoHold.engineParts + transaction.deltaEngineParts,
-    contraband: acc.cargoHold.contraband + deltaContraband
+    contraband: acc.cargoHold.contraband + deltaContraband,
   };
   const ship =
     transaction.shipPurchase === undefined
@@ -87,7 +87,7 @@ const reducer = transactions => (acc, planet, index) => {
     cargoHold,
     money,
     ship,
-    errors
+    errors,
   };
 };
 function check(planets, transactions) {
@@ -100,7 +100,7 @@ function check(planets, transactions) {
     deltaWater: -solverStateAtLastPlanet.cargoHold.water,
     deltaOre: -solverStateAtLastPlanet.cargoHold.ore,
     deltaEngineParts: -solverStateAtLastPlanet.cargoHold.engineParts,
-    deltaContraband: -solverStateAtLastPlanet.cargoHold.contraband
+    deltaContraband: -solverStateAtLastPlanet.cargoHold.contraband,
   };
   return reducer([finalTrade])(
     solverStateAtLastPlanet,

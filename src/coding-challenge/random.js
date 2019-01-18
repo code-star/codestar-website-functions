@@ -1,6 +1,6 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 function createRandom(s) {
   return function() {
     s = Math.sin(s) * 10000;

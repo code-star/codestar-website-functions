@@ -1,6 +1,6 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 function flatten(outer) {
   const result = [];
   outer.forEach(inner => {
@@ -29,7 +29,7 @@ function rangeFrom(lowerBoundInclusive, upperBoundExclusive) {
 exports.rangeFrom = rangeFrom;
 function max(arr, compare) {
   if (arr.length === 0) {
-    throw new Error("Need at least one element!");
+    throw new Error('Need at least one element!');
   }
   return arr.reduce((acc, curr) => {
     const compared = compare(acc, curr);

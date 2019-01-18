@@ -1,19 +1,19 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.OK = "OK";
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.OK = 'OK';
 function ok(value) {
   return {
     type: exports.OK,
-    value
+    value,
   };
 }
 exports.ok = ok;
-exports.ERROR = "ERROR";
+exports.ERROR = 'ERROR';
 function error(errors) {
   return {
     type: exports.ERROR,
-    errors
+    errors,
   };
 }
 exports.error = error;

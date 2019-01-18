@@ -1,7 +1,7 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const random_1 = require("./random");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const random_1 = require('./random');
 const MIN_PRICE = 1;
 const MAX_PRICE = 20;
 const CONTRA_BAND_FRACTION = 2;
@@ -21,9 +21,9 @@ function generatePlanets(seed, numberOfPlanets) {
       random()
     );
     const factionNumber = random();
-    const faction = factionNumber < 0.5 ? "Liberty" : "Black Moranth";
+    const faction = factionNumber < 0.5 ? 'Liberty' : 'Black Moranth';
     const contrabandPrice =
-      faction === "Black Moranth"
+      faction === 'Black Moranth'
         ? random_1.toIntegerBetween(
             MIN_PRICE * CONTRA_BAND_FRACTION,
             MAX_PRICE * CONTRA_BAND_FRACTION,
@@ -35,7 +35,7 @@ function generatePlanets(seed, numberOfPlanets) {
       waterPrice,
       partsPrice,
       faction,
-      contrabandPrice
+      contrabandPrice,
     });
   }
   return planets;

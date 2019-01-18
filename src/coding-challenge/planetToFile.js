@@ -1,8 +1,8 @@
 /* eslint-disable */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = require("fs");
-function planetToFile(fileName, planets, separator = ",") {
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const fs_1 = require('fs');
+function planetToFile(fileName, planets, separator = ',') {
   const csvLines = planets.map(
     ({ orePrice, waterPrice, partsPrice, faction, contrabandPrice }, index) =>
       [
@@ -11,12 +11,12 @@ function planetToFile(fileName, planets, separator = ",") {
         waterPrice,
         partsPrice,
         faction,
-        contrabandPrice
+        contrabandPrice,
       ].join(separator)
   );
   const csv =
-    "Index,Ore price,Water price,Engine parts,Faction,Contraband price\n" +
-    csvLines.join("\n");
+    'Index,Ore price,Water price,Engine parts,Faction,Contraband price\n' +
+    csvLines.join('\n');
   fs_1.writeFile(fileName, csv, e => {
     console.error(e);
   });
