@@ -120,6 +120,14 @@ functions:
           method: get
           path: get-recent-tweets
           cors: true
+  checkCodingChallenge:
+    handler: src/coding-challenge/index.checkLambda
+    description: Check solution to coding challenge
+    events:
+      - http:
+          method: post
+          path: check-coding-challenge
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
