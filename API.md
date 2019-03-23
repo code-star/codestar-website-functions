@@ -2,11 +2,50 @@
 
 ### Table of Contents
 
--   [staticSiteMailer][1]
+-   [getPublications][1]
     -   [Parameters][2]
     -   [Examples][3]
--   [safeGetHeaders][4]
+-   [staticSiteMailer][4]
     -   [Parameters][5]
+    -   [Examples][6]
+-   [safeGetHeaders][7]
+    -   [Parameters][8]
+
+## getPublications
+
+Lambda function getPublications
+
+Method: GET
+
+Validates the origin URL with [safeGetHeaders][9]
+
+Endpoints
+
+-   on test stage: [https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/get-publications][10]
+-   on prod stage: [https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/get-publications][11]
+
+### Parameters
+
+-   `event` **[object][12]** AWS event
+-   `context` **[object][12]** AWS context
+-   `callback` **[function][13]** AWS callback
+
+### Examples
+
+```javascript
+// Call locally from the CLI:
+DEBUG=true npx sls invoke local --function getPublications --path test/staticSiteMailer-dummy-payload.json
+
+// Expected payload
+{
+  "headers": {
+     "origin": "ORIGIN"
+  },
+  "body": "[ { id: "123", "title": "My Post" } ]",
+}
+```
+
+Returns **[Promise][14]&lt;void>** Nothing is returned, AWS callback is used instead
 
 ## staticSiteMailer
 
@@ -20,12 +59,12 @@ Expected fields:
 -   email {string}
 -   message {string}
 
-Validates the origin URL with [safeGetHeaders][6]
+Validates the origin URL with [safeGetHeaders][9]
 
 Endpoints
 
--   on test stage: [https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer][7]
--   on prod stage: [https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer][8]
+-   on test stage: [https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer][15]
+-   on prod stage: [https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer][16]
 
 Envars that need to be set:
 process.env.STATIC_SITE_MAILER_SOURCE;
@@ -35,9 +74,9 @@ Both mail addresses need to be validated in AWS SES
 
 ### Parameters
 
--   `event` **[object][9]** AWS event
--   `context` **[object][9]** AWS context
--   `callback` **[function][10]** AWS callback
+-   `event` **[object][12]** AWS event
+-   `context` **[object][12]** AWS context
+-   `callback` **[function][13]** AWS callback
 
 ### Examples
 
@@ -54,7 +93,7 @@ STATIC_SITE_MAILER_SOURCE=example@example.com STATIC_SITE_MAILER_DESTINATION=exa
 }
 ```
 
-Returns **[Promise][11]&lt;void>** Nothing is returned, AWS callback is used instead
+Returns **[Promise][14]&lt;void>** Nothing is returned, AWS callback is used instead
 
 ## safeGetHeaders
 
@@ -63,30 +102,40 @@ This must be done before anything else to prevent calls from unknown origins.
 
 ### Parameters
 
--   `origin` **[string][12]** URL describing the origin of the call
+-   `origin` **[string][17]** URL describing the origin of the call
 
-Returns **[Object][9]** headers
+Returns **[Object][12]** headers
 
-[1]: #staticsitemailer
+[1]: #getpublications
 
 [2]: #parameters
 
 [3]: #examples
 
-[4]: #safegetheaders
+[4]: #staticsitemailer
 
 [5]: #parameters-1
 
-[6]: safeGetHeaders
+[6]: #examples-1
 
-[7]: https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer
+[7]: #safegetheaders
 
-[8]: https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer
+[8]: #parameters-2
 
-[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[9]: safeGetHeaders
 
-[10]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[10]: https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/get-publications
 
-[11]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[11]: https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/get-publications
 
-[12]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[12]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[13]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[15]: https://hjoutysc5k.execute-api.eu-west-1.amazonaws.com/test/static-site-mailer
+
+[16]: https://267sder6c7.execute-api.eu-west-1.amazonaws.com/prod/static-site-mailer
+
+[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String

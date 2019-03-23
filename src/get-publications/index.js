@@ -1,5 +1,11 @@
 'use strict';
+
+// Use `got` instead of using `https` (intransparent syntax) or `request-promise` (bloated)
+const got = require('got');
 const util = require('../util');
+
+const GET_PUBLICATIONS_URL =
+  'https://medium.com/codestar-blog/latest?format=json';
 
 /**
  * @description Lambda function getPublications
@@ -26,21 +32,34 @@ const util = require('../util');
  *   "headers": {
  *      "origin": "ORIGIN"
  *   },
- *   "body": "{ ? }",
+ *   "body": "[ { id: "123", "title": "My Post" } ]",
  * }
  */
 module.exports.getPublications = async (event, context, callback) => {
   try {
     const headers = util.safeGetHeaders(event.headers.origin);
-    console.log(headers);
-    // const data = await sendEmail(formData, sourceAddress, destinationAddress);
-    // callback(null, {
-    //   statusCode: 200,
-    //   headers,
-    //   body: JSON.stringify({
-    //     message: data,
-    //   }),
-    // });
+    const response = await got(GET_PUBLICATIONS_URL);
+    // Strip security header
+    const saneResponse = response.body.substr(16);
+    const responseJson = JSON.parse(saneResponse);
+    const posts = responseJson.payload.posts;
+    const users = responseJson.payload.references.User;
+    const simplePosts = posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      author: users[post.creatorId].name,
+      authorImg: users[post.creatorId].imageId,
+      latestPublishedAt: post.latestPublishedAt,
+      uniqueSlug: post.uniqueSlug,
+      // TODO filter paragraphs that are empty or equal to the title
+      paragraphs: post.previewContent.bodyModel.paragraphs.map(p => p.text),
+    }));
+    // console.log(simplePosts);
+    callback(null, {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify(simplePosts),
+    });
   } catch (err) {
     console.log(err, err.stack);
     callback('Failed GET_PUBLICATIONS ' + err);
