@@ -53,8 +53,8 @@ module.exports.getPublications = async (event, context, callback) => {
       uniqueSlug: post.uniqueSlug,
       // TODO filter paragraphs that are empty or equal to the title
       paragraphs: post.previewContent.bodyModel.paragraphs.map(p => p.text),
+      previewImgId: post.virtuals.previewImage.imageId,
     }));
-    // console.log(simplePosts);
     callback(null, {
       statusCode: 200,
       headers,

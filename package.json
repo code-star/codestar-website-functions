@@ -14,7 +14,7 @@
     "build": "sls package --verbose",
     "docs": "documentation build src/* -f md > API.md",
     "lint": "eslint ./src/**/*",
-    "test": "npm run lint && nyc ava src/*.test.js",
+    "test": "npm run lint && nyc ava src/**/*.test.js",
     "prettier": "prettier --write ./src/**/*.{js,ts}",
     "prepush": "npm test",
     "precommit": "npm run docs && npm run prettier"
