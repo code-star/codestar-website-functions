@@ -128,6 +128,14 @@ functions:
           method: post
           path: check-coding-challenge
           cors: true
+  getPublications:
+    handler: src/get-publications/index.getPublications
+    description: Get enhanced publications from Medium
+    events:
+      - http:
+          method: get
+          path: get-publications
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
