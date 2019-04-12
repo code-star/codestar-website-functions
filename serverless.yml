@@ -89,7 +89,7 @@ package:
 
 functions:
   staticSiteMailer:
-    handler: serverless/mailer.staticSiteMailer
+    handler: src/mailer.staticSiteMailer
     description: Send mail from the contact form
     events:
       - http:
@@ -97,7 +97,7 @@ functions:
           path: static-site-mailer
           cors: true
   getUpcomingEvents:
-    handler: serverless/meetup.getUpcomingEvents
+    handler: src/meetup.getUpcomingEvents
     description: Get upcoming events on Meetup.com
     events:
       - http:
@@ -105,7 +105,7 @@ functions:
           path: get-upcoming-events
           cors: true
   getPastEvents:
-    handler: serverless/meetup.getPastEvents
+    handler: src/meetup.getPastEvents
     description: Get past events on Meetup.com
     events:
       - http:
@@ -113,12 +113,28 @@ functions:
           path: get-past-events
           cors: true
   getRecentTweets:
-    handler: serverless/twitter.getRecentTweets
+    handler: src/twitter.getRecentTweets
     description: Get recent tweets for some account (e.g. next speaker)
     events:
       - http:
           method: get
           path: get-recent-tweets
+          cors: true
+  checkCodingChallenge:
+    handler: src/coding-challenge/index.checkLambda
+    description: Check solution to coding challenge
+    events:
+      - http:
+          method: post
+          path: check-coding-challenge
+          cors: true
+  getPublications:
+    handler: src/get-publications/index.getPublications
+    description: Get enhanced publications from Medium
+    events:
+      - http:
+          method: get
+          path: get-publications
           cors: true
 
 #    The following are a few example events you can configure
