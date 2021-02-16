@@ -1,5 +1,5 @@
-import { getPublications } from './index';
-import test from 'ava';
+const { getPublications } = require('./index');
+const test = require('ava');
 
 test('Calls callback with array if successful', async t => {
   t.plan(1);
