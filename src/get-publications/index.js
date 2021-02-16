@@ -2,10 +2,10 @@
 
 // Use `got` instead of using `https` (intransparent syntax) or `request-promise` (bloated)
 const got = require('got');
+const parser = require('fast-xml-parser');
 const util = require('../util');
 
-const GET_PUBLICATIONS_URL =
-  'https://medium.com/codestar-blog/latest?format=json';
+const GET_PUBLICATIONS_URL = 'https://medium.com/feed/codestar-blog';
 
 /**
  * @description Lambda function getPublications
@@ -39,21 +39,15 @@ module.exports.getPublications = async (event, context, callback) => {
   try {
     const headers = util.safeGetHeaders(event.headers.origin);
     const response = await got(GET_PUBLICATIONS_URL);
-    // Strip security header
-    const saneResponse = response.body.substr(16);
-    const responseJson = JSON.parse(saneResponse);
-    const posts = responseJson.payload.posts;
-    const users = responseJson.payload.references.User;
+    const jsonObj = parser.parse(response.body);
+    const posts = jsonObj.rss.channel.item;
     const simplePosts = posts.map(post => ({
-      id: post.id,
+      id: post.guid,
       title: post.title,
-      author: users[post.creatorId].name,
-      authorImg: users[post.creatorId].imageId,
-      latestPublishedAt: post.latestPublishedAt,
-      uniqueSlug: post.uniqueSlug,
-      // TODO filter paragraphs that are empty or equal to the title
-      paragraphs: post.previewContent.bodyModel.paragraphs.map(p => p.text),
-      previewImgId: post.virtuals.previewImage.imageId,
+      author: post['dc:creator'],
+      latestPublishedAt: post.pubDate,
+      uniqueSlug: post.link,
+      paragraphs: post['content:encoded'],
     }));
     callback(null, {
       statusCode: 200,

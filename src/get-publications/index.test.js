@@ -1,5 +1,5 @@
-import { getPublications } from './index';
-import test from 'ava';
+const { getPublications } = require('./index');
+const test = require('ava');
 
 test('Calls callback with array if successful', async t => {
   t.plan(1);
@@ -8,7 +8,7 @@ test('Calls callback with array if successful', async t => {
   await getPublications(
     {
       headers: {
-        origin: 'https://www.codestar.nl',
+        origin: 'https://code-star.github.io',
       },
       body: JSON.stringify({}),
     },

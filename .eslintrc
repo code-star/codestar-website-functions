@@ -1,7 +1,7 @@
 {
   "extends": ["node", "node/style-guide", "prettier"],
   "rules": {
-    "import/no-commonjs": false,
+    "import/no-commonjs": 0,
     "no-console": "off"
   }
 }
