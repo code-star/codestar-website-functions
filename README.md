@@ -102,6 +102,7 @@ https://docs.travis-ci.com/user/deployment/lambda
 
 ## Deploying
 
+<!-- TODO replace by Github actions -->
 **Note** that deployment should only be done by [Travis CI](https://travis-ci.org/code-star/codestar-website-functions).
 
 - New features must be added by pull request to the `test` branch

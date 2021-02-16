@@ -1,5 +1,5 @@
 // API calls only over HTTPS!
-const allowedOrigins = ['https://www.codestar.nl', 'https://test.codestar.nl'];
+const allowedOrigins = ['https://code-star.github.io', 'https://code-star.github.io/codestar-website-react/'];
 
 // Response headers
 const headers = origin => ({
