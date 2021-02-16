@@ -8,7 +8,7 @@ test('Calls callback with array if successful', async t => {
   await getPublications(
     {
       headers: {
-        origin: 'https://www.codestar.nl',
+        origin: 'https://code-star.github.io',
       },
       body: JSON.stringify({}),
     },

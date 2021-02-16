@@ -39,31 +39,15 @@ module.exports.getPublications = async (event, context, callback) => {
   try {
     const headers = util.safeGetHeaders(event.headers.origin);
     const response = await got(GET_PUBLICATIONS_URL);
-    // Strip security header
-    // const saneResponse = response.body.substr(16);
-
-    // var tObj = parser.getTraversalObj("<test>a</test>");
-    // var jsonObj = parser.convertToJson(tObj);
-    // console.log(response.body);
     const jsonObj = parser.parse(response.body);
-    // const jsonObj = parser.parse("<posts><post>a</post><post>a</post></posts>");
-
-    console.log(jsonObj.rss.channel.item);
-    // TODO XML to json
-    const responseJson = jsonObj; // JSON.parse(response);
-    const posts = jsonObj.rss.channel.item; // responseJson.payload.posts;
-    console.log(posts);
-    // const users = responseJson.payload.references.User;
+    const posts = jsonObj.rss.channel.item;
     const simplePosts = posts.map(post => ({
       id: post.guid,
       title: post.title,
-      author: post['dc:creator'], // users[post.creatorId].name,
-      // authorImg: users[post.creatorId].imageId,
-      latestPublishedAt: post.pubDate, // post.latestPublishedAt,
-      uniqueSlug: post.link, // post.uniqueSlug,
-      // // TODO filter paragraphs that are empty or equal to the title
-      paragraphs: post['content:encoded'], // post.previewContent.bodyModel.paragraphs.map(p => p.text),
-      // previewImgId: post.virtuals.previewImage.imageId,
+      author: post['dc:creator'],
+      latestPublishedAt: post.pubDate,
+      uniqueSlug: post.link,
+      paragraphs: post['content:encoded'],
     }));
     callback(null, {
       statusCode: 200,
