@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "fast-xml-parser": "^3.18.0",
-    "got": "^9.6.0",
+    "got": "^11.8.1",
     "oauth": "^0.9.15"
   },
+  "type": "commonjs",
   "scripts": {
     "build": "sls package --verbose",
     "docs": "documentation build src/* -f md > API.md",
@@ -19,15 +20,15 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "ava": "^1.4.1",
-    "documentation": "^8.1.2",
-    "eslint": "^5.15.3",
-    "eslint-config-prettier": "^3.6.0",
-    "eslint-config-recommended": "^4.0.0",
-    "nyc": "^13.3.0",
-    "prettier": "^1.16.4",
-    "serverless": "^1.39.1",
-    "sinon": "^7.3.1"
+    "ava": "^3.15.0",
+    "documentation": "^13.1.1",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-recommended": "^4.1.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.2.1",
+    "serverless": "^2.25.0",
+    "sinon": "^9.2.4"
   },
   "husky": {
     "hooks": {
