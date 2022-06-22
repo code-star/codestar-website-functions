@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "fast-xml-parser": "^3.18.0",
-    "got": "^11.8.1",
+    "got": "^11.8.5",
     "oauth": "^0.9.15"
   },
   "type": "commonjs",
