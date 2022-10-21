@@ -1,3 +1,5 @@
+# ⛔️ ARCHIVED - we are now using static site generation https://github.com/code-star/codestar-website-next
+
 [![Build Status](https://travis-ci.org/code-star/codestar-website-functions.svg?branch=test)](https://travis-ci.org/code-star/codestar-website-functions)
 
 <img align=center src=https://cloud.githubusercontent.com/assets/4116708/12473911/e67fdd44-c016-11e5-9c21-5714e07549fe.png width=450 />
@@ -102,6 +104,7 @@ https://docs.travis-ci.com/user/deployment/lambda
 
 ## Deploying
 
+<!-- TODO replace by Github actions -->
 **Note** that deployment should only be done by [Travis CI](https://travis-ci.org/code-star/codestar-website-functions).
 
 - New features must be added by pull request to the `test` branch
